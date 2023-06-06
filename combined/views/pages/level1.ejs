@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/output.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <form action="/submit" method="post">
+        <h3>Question 1</h3>
+        <input type="radio" name="question1" value="Option 1" required> Option 1
+        <input type="radio" name="question1" value="Option 2"> Option 2
+        <input type="radio" name="question1" value="Option 3"> Option 3
+      
+        <h3>Question 2</h3>
+        <input type="checkbox" name="question2" value="Option A"> Option A
+        <input type="checkbox" name="question2" value="Option B"> Option B
+        <input type="checkbox" name="question2" value="Option C"> Option C
+      
+        <button type="submit">Submit</button>
+    </form> -->
+    <form action="/level1" method="POST" novalidate> 
+    <% for(let i=1;i<=questions.length;i++) { %>
+    <% if(i==1) { %>
+    <div class="Q<%= i %> mx-8 my-5 px-10 py-16 p-4 bg-gray-100 rounded-lg shadow">
+        <% } else { %>
+    <div class="Q<%= i %> mx-8 my-5 px-10 py-16 p-4 bg-gray-100 rounded-lg shadow hidden">
+     <% } %>
+        <h2 class="text-lg font-semibold mb-4"><%= questions[i].Q %></h2>
+        <ul class="questions space-y-2">
+            <li>
+                <label class="inline-flex items-center">
+                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="1">
+                    <span class="ml-2"><%= questions[i].opt1 %></span>
+                </label>
+            </li>
+            <li>
+                <label class="inline-flex items-center">
+                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="2">
+                    <span class="ml-2"><%= questions[i].opt2 %></span>
+                </label>
+            </li>
+            <li>
+                <label class="inline-flex items-center">
+                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="3">
+                    <span class="ml-2"><%= questions[i].opt3 %></span>
+                </label>
+            </li>
+            <div class="float-right">
+                <% if(i!=1) { %>
+                <button type="button"  class="mr-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 prev" onclick="prevCurr('<%= i-1 %>')">
+                    Previous
+                </button>
+                <% } %>
+                <% if(i!=questions.length) { %>
+                <button type="button" class="mr-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 pointer-events-none saveAndnext" onclick="nextCurr('<%= i+1 %>',0)">
+                    Save & next
+                </button>
+                <button type="button"  class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 skip"  onclick="nextCurr('<%= i+1 %>',1)">Reset and Skip</button>
+                <% } else { %>
+                    <button type="submit" class="mr-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 saveAndnext submit">
+                        Submit & proceed to next section
+                    </button>
+                <% } %>
+            </div>
+            <li>
+                <label class="inline-flex items-center">
+                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="4">
+                    <span class="ml-2"><%= questions[i].opt4 %></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+    <% } %>
+    </form>
+    <script>
+        const questionArr = document.getElementsByClassName('questions');
+        for(let i=0;i<questionArr.length;i++){
+            let options=questionArr[i].getElementsByTagName('input');
+            let selected=0;
+            for(let j=0;j<options.length;j++){
+                options[j].addEventListener('input',()=>{
+                    selected+=options[j].checked;
+                    let saveAndnext=questionArr[i].getElementsByClassName('saveAndnext')[0];
+                    if(selected){
+                    saveAndnext.classList.remove('pointer-events-none');
+                    selected=0;
+                    }
+                });
+            }
+        }
+        function nextCurr(next, skip){
+            next=next-0;//typecasting, dont use '+' use '-'
+            document.getElementsByClassName(`Q${next-1}`)[0].classList.add("hidden");
+            document.getElementsByClassName(`Q${next}`)[0].classList.remove("hidden");
+            if(skip){
+                let q=document.getElementsByClassName(`Q${next-1}`)[0];
+                let options=q.getElementsByTagName('input');
+                console.log(options);
+                for(let j=0;j<options.length;j++)
+                    options[j].checked=false;
+                q.getElementsByClassName('saveAndnext')[0].classList.add('pointer-events-none');
+            }
+        }
+        function prevCurr(prev){
+            prev=prev-0;
+            document.getElementsByClassName(`Q${prev+1}`)[0].classList.add("hidden");
+            document.getElementsByClassName(`Q${prev}`)[0].classList.remove("hidden");
+        }
+    </script>
+</body>
+
+</html>
