@@ -82,6 +82,10 @@ app.get('/home', (req, res) => {
   res.render('./pages/front.ejs');
 });
 
+app.get('/dashboard', (req, res) => {
+  res.render('./pages/dashboard.ejs');
+});
+
 // page not found error handling  middleware
 app.use('*', (req, res, next) => {
   const error = {
