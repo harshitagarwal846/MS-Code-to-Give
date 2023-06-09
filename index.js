@@ -114,10 +114,6 @@ app.get('/dashboard', (req, res) => {
   res.render('./pages/dashboard.ejs');
 });
 
-app.get('/dashboard', (req, res) => {
-  res.render('./pages/dashboard.ejs');
-});
-
 app.get('/admin', (req, res) => {
   res.render('./pages/admin.ejs');
 });
