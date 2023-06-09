@@ -118,6 +118,10 @@ app.get('/dashboard', (req, res) => {
   res.render('./pages/dashboard.ejs');
 });
 
+app.get('/admin', (req, res) => {
+  res.render('./pages/admin.ejs');
+});
+
 // page not found error handling  middleware
 app.use('*', (req, res, next) => {
   const error = {
