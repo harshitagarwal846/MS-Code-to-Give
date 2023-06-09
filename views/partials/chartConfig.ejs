@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <title><%= title %></title>
+</head>
+
+<body>
+  <div x-data="setup()" :class="{ 'dark': isDark }">
+    <div
+      class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+
+      <!-- Header -->
+      <%- include("../partials/dashboardHeader") %>
+        <!-- ./Header -->
+
+        <!-- Sidebar -->
+        <%- include("../partials/dashboardSidebar") %>
+          <!-- ./Sidebar -->
+          <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+            <div>
+              <% for(let i=1;i<=questions.length;i++){ %>
+                <div>
+                  <p class="p-2 m-4 text-lg font-semibold">
+                    <%= i %>. <%= questions[i] %>
+                  </p>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-4">
+                    <% for(let idx=0;idx<=(values[i].length-1);idx++){ %>
+                      <div>
+                        <canvas id="<%= i %>pie<%= idx %>"></canvas>
+                      </div>
+                      <% } %>
+                  </div>
+                </div>
+                <% } %>
+            </div>
+          </div>
+    </div>
+  </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+<script>
+  const setup = () => {
+    const getTheme = () => {
+      if (window.localStorage.getItem('dark')) {
+        return JSON.parse(window.localStorage.getItem('dark'))
+      }
+      return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+
+    const setTheme = (value) => {
+      window.localStorage.setItem('dark', value)
+    }
+
+    return {
+      loading: true,
+      isDark: getTheme(),
+      toggleTheme() {
+        this.isDark = !this.isDark
+        setTheme(this.isDark)
+      },
+    }
+  }
+</script>
+
+<script>
+  let values = '<%- JSON.stringify(values) %>'
+  values = JSON.parse(values);
+  // console.log(values);
+
+  const map = {
+    0: "Non Addicted",
+    1: "Mildly Addicted",
+    2: "Severely Addicted"
+  }
+
+  for (let i = 1; i <= Object.keys(values).length; i++) {
+    for (let idx = 0; idx < values[i].length; idx++) {
+      // console.log(i, idx, values[i][idx])
+      const ctx = document.getElementById(`${i}pie${idx}`);
+
+      //defining the labels on x-axis
+      const labels = ["Yes", "No", "Sometimes", "Prefer Not To Say"];
+
+      //data for each label
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: map[idx],
+            data: values[i][idx],
+            backgroundColor: ['#FFB1C1', '#00DFA2', '#9BD0F5', '#F6FA70'],
+          },
+        ]
+      };
+
+      const config = {
+        type: 'pie',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                font: {
+                  size: 14
+                }
+              }
+            },
+            title: {
+              display: true,
+              position: 'bottom',
+              text: map[idx],
+              font: {
+                size: 16,
+                weight: 700
+              }
+            },
+          }
+        },
+      };
+
+      //displaying graph
+      new Chart(ctx, config);
+    }
+  }
+</script>
+
+</html>
