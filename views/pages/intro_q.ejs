@@ -12,16 +12,20 @@
     <%- include("../partials/navbar") %>
         <section class="container px-4 md:pl-20 py-16 mx-auto lg:h-128 lg:space-x-8 lg:flex lg:items-center">
             <div class="w-full text-center lg:text-left lg:w-1/2 lg:-mt-8">
-                <h1 class="text-3xl leading-snug text-gray-800 dark:text-gray-200 md:text-4xl">
-                    A <span class="font-semibold">free repository</span> for community <br class="hidden lg:block">
-                    components using <span class="font-semibold underline decoration-primary">Tailwind CSS</span></h1>
-                <p class="mt-4 text-lg text-gray-500 dark:text-gray-300">Feeling over-dependent on a substance and being
-                    unable to get rid of it? We provide rehabilitation and mentoring programs to help get rid of
-                    this entaglement. </p>
                 <a href="/level1">
                     <div
                         class="mt-6 border dark:border-gray-700 lg:w-2/3 rounded-lg bg-sky-400 hover:cursor-pointer hover:bg-sky-500 p-3 text-lg md:text-2xl hover:scale-x-[1.05] ease-in duration-200">
-                        Click here to take the questionnaire<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                        1 optional question<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                        </svg>
+                    </div>
+                </a>
+                <a href="/level2/screen">
+                    <div
+                        class="mt-6 border dark:border-gray-700 lg:w-2/3 rounded-lg bg-sky-400 hover:cursor-pointer hover:bg-sky-500 p-3 text-lg md:text-2xl hover:scale-x-[1.05] ease-in duration-200">
+                        mandatory questions<svg xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -32,8 +36,6 @@
             <div class="w-full mt-4 lg:mt-0 lg:w-1/2"><img src="/images/hero.svg" alt="mental health"
                     class="w-full h-full max-w-md mx-auto"></div>
         </section>
-        <a href="/level1">Optional Questions</a>
-        <a href="/level2">Mandatory Questions</a>
         <%- include("../partials/footer") %>
 
 </body>

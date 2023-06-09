@@ -6,13 +6,17 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
+const fetch = require("node-fetch");
 
 const { PORT, MONGODB_URI, NODE_ENV, ORIGIN } = require('./config');
 const { API_ENDPOINT_NOT_FOUND_ERR, SERVER_ERR } = require('./errors');
 
-const { questions } = require('./questions');
+const { all_questions } = require('./questions');
+const {converttoOptionString,converttoOptionNo,find, api_call,saveSurvey}= require('./functions');
+const Addiction=require('./models/response.model')
 // routes
 const authRoutes = require('./routes/auth.route');
+const { func } = require('joi');
 
 // init express app
 const app = express();
@@ -54,32 +58,60 @@ app.get('/', (req, res) => {
 
 // routes middlewares
 
+const response={};//yesno
+const responseNo={};//1,2,3,4
+const addictions=['screen','behaviour','marijuana','alcohol'];
+
+
 app.use('/api/auth', authRoutes);
 
-app.get('/change/:section', (req, res) => {
-  let section = req.params.section;
-  res.redirect(`/${section}`);
-});
+
+app.post('/level2/:type',async(req,res)=>{
+  var type=req.params.type;
+  let curr=find(type,addictions)-0;
+  response[addictions[curr-1]]=converttoOptionString(req.body);
+  responseNo[addictions[curr-1]]=converttoOptionNo(req.body);
+  console.log(response);
+  if(curr==addictions.length){
+    //code for fetching prediction
+    await api_call(response,responseNo);
+    res.redirect('/result');
+  }
+  else
+  res.redirect(`${addictions[curr]}`);
+})
+
+
+app.get('/result',(req,res)=>{
+  res.render('./pages/result')
+})
+app.get('/start',(req,res)=>{
+  res.render('./pages/intro_q')
+})
 
 app.post('/level1', (req, res) => {
   console.log(req.body);
-  res.redirect('/change/level2');
+  res.redirect('/level2/1');
 });
 
 app.get('/level1', (req, res) => {
   res.render('./pages/level1', { questions });
 });
 
-app.post('/level2', (req, res) => {
-  console.log(req.body);
-});
 
-app.get('/level2', (req, res) => {
+app.get('/level2/:type', (req, res) => {
+  let type = req.params.type;
+  let questions=all_questions[type];
+  // console.log(questions);
   res.render('./pages/level2', { questions });
 });
 
 app.get('/home', (req, res) => {
-  res.render('./pages/front.ejs');
+  res.render('./pages/home.ejs');
+});
+
+app.get('/dashboard', (req, res) => {
+  res.render('./pages/dashboard.ejs');
 });
 
 // page not found error handling  middleware
@@ -103,6 +135,7 @@ app.use((err, req, res, next) => {
     data,
   });
 });
+
 
 async function main() {
   try {
