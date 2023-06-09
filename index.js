@@ -110,15 +110,35 @@ app.get('/home', (req, res) => {
   res.render('./pages/home.ejs');
 });
 
-app.get('/dashboard', (req, res) => {
-  res.render('./pages/dashboard.ejs');
+app.get('/dashboard', async (req, res) => {
+  //no,mild,severe
+  let values = {
+    alcohol: [0, 0, 0],
+    behaviour: [0, 0, 0],
+    screen: [0, 0, 0],
+    marijuana: [0, 0, 0],
+  };
+  try {
+    for (const key in values) {
+      for (let i = 0; i < 3; i++) {
+        const query = {
+          [`${key}.level`]: i,
+        };
+        values[key][i] = await Addiction.countDocuments(query);
+      }
+    }
+
+    res.render('./pages/dashboard.ejs', { values });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.get('/admin', (req, res) => {
   res.render('./pages/admin.ejs');
 });
 
-app.get('/dashboard/:substance', (req, res) => {
+app.get('/dashboard/:substance', async (req, res) => {
   let sub = req.params.substance;
   let values = {
     1: [
@@ -147,8 +167,26 @@ app.get('/dashboard/:substance', (req, res) => {
       [5, 10, 11, 12],
     ],
   };
-  console.log(all_questions[sub]);
-  res.render(`./pages/${sub}`, { questions: all_questions[sub], values });
+  try {
+    for (const qno in values) {
+      for (let i = 0; i < 3; i++) {
+        for (let j = 1; j <= 4; j++) {
+          const query1 = {
+            [`${sub}.level`]: i,
+          };
+          const query2 = {
+            [`${sub}.response.${qno - 1}`]: j,
+          };
+          values[qno][i][j - 1] = await Addiction.countDocuments({
+            $and: [query1, query2],
+          });
+        }
+      }
+    }
+    res.render(`./pages/${sub}`, { questions: all_questions[sub], values });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // page not found error handling  middleware

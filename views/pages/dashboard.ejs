@@ -141,32 +141,35 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="text-gray-700 dark:text-gray-100">
-                          <th
-                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap text-left">
-                            Mobile Phone</th>
-                          <td
-                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
-                            5,480
-                          </td>
-                          <td
-                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
-                            5,480
-                          </td>
-                          <td
-                            class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
-                            <a href="/dashboard/alcohol">
-                              <div
-                                class="origin-top-right hover:cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 px-3 hover:scale-x-[1.05] ease-in-out duration-300">
-                                Click Here <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                  stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
-                                  <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                                </svg>
-                              </div>
-                            </a>
-                          </td>
-                        </tr>
+                        <% for(const key in values) { %>
+                          <tr class="text-gray-700 dark:text-gray-100">
+                            <th
+                              class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap text-left">
+                              <%= key %>
+                            </th>
+                            <td
+                              class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
+                              <%= values[key][2] %>
+                            </td>
+                            <td
+                              class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
+                              <%= values[key][1] %>
+                            </td>
+                            <td
+                              class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
+                              <a href="/dashboard/<%= key %>">
+                                <div
+                                  class="origin-top-right hover:cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 px-3 hover:scale-x-[1.05] ease-in-out duration-300">
+                                  Click Here <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                  </svg>
+                                </div>
+                              </a>
+                            </td>
+                            <% } %>
+                          </tr>
                       </tbody>
                     </table>
                   </div>
@@ -249,25 +252,37 @@
   //defining the labels on x-axis
   const labels = ['Alcohol', 'Behavioural', 'Device Screen', 'Marijuana'];
 
+  let values = '<%- JSON.stringify(values) %>'
+  values = JSON.parse(values);
+  // console.log(values['alcohol']);
+  let barData = [];
+  for (let i = 0; i < 3; i++) {
+    let temp = [];
+    for (const key in values)
+      temp.push(values[key][i]);
+    barData.push(temp);
+  }
+  // console.log(barData)
+
   //data for each label
   const data = {
     labels: labels,
     datasets: [
       {
         label: 'Non Addicted',
-        data: [1, 2, 3, 4],
+        data: barData[0],
         borderColor: '#36A2EB',
         backgroundColor: '#9BD0F5',
       },
       {
         label: 'Mildly Addicted',
-        data: [7, 8, 9, 10],
+        data: barData[1],
         borderColor: '#FF6384',
         backgroundColor: '#FFB1C1',
       },
       {
         label: 'Severely Addicted',
-        data: [4, 5, 6, 7],
+        data: barData[2],
         borderColor: '#00DFA2',
         backgroundColor: '#00DFA2',
       }
