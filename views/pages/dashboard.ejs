@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="css/dashboard.css">
-  <title>Dasboard</title>
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -154,14 +155,16 @@
                           </td>
                           <td
                             class="border-t-0 px-4 align-middle border-l-0 border-r-0 text-[0.81rem] whitespace-nowrap">
-                            <div
-                              class="origin-top-right hover:cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 px-3 hover:scale-x-[1.05] ease-in-out duration-300">
-                              Click Here <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                              </svg>
-                            </div>
+                            <a href="/dashboard/alcohol">
+                              <div
+                                class="origin-top-right hover:cursor-pointer text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-600 px-3 hover:scale-x-[1.05] ease-in-out duration-300">
+                                Click Here <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                  stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
+                                  <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg>
+                              </div>
+                            </a>
                           </td>
                         </tr>
                       </tbody>
@@ -171,6 +174,10 @@
               </div>
               <!-- ./Drug Traffic -->
 
+            </div>
+
+            <div id="container" class="m-2 md:p-5 md:m-5 bg-white shadow-lg">
+              <canvas id="myChart"></canvas>
             </div>
 
             <!-- Recent Feedbacks -->
@@ -236,6 +243,97 @@
       },
     }
   }
+
+  const ctx = document.getElementById('myChart');
+
+  //defining the labels on x-axis
+  const labels = ['Alcohol', 'Behavioural', 'Device Screen', 'Marijuana'];
+
+  //data for each label
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Non Addicted',
+        data: [1, 2, 3, 4],
+        borderColor: '#36A2EB',
+        backgroundColor: '#9BD0F5',
+      },
+      {
+        label: 'Mildly Addicted',
+        data: [7, 8, 9, 10],
+        borderColor: '#FF6384',
+        backgroundColor: '#FFB1C1',
+      },
+      {
+        label: 'Severely Addicted',
+        data: [4, 5, 6, 7],
+        borderColor: '#00DFA2',
+        backgroundColor: '#00DFA2',
+      }
+    ]
+  };
+
+  // //explicit tooltip content
+  // const footer = (tooltipItems) => {
+  //   let sum = 0;
+
+  //   tooltipItems.forEach((tooltipItem) => {
+  //     sum += tooltipItem.parsed.y;
+  //   });
+  //   tooltipItems.forEach((tooltipItem) => {
+  //     let cur=tooltipItem.parsed.y;
+  //     let per=(cur*100)/sum;
+  //     return 'Percentage: ' + per;
+  //   });
+
+  // };
+
+  //configuration of the graph
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 14
+            }
+          }
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 14
+            }
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            font: {
+              size: 14
+            }
+          }
+        },
+        title: {
+          display: true,
+          text: 'Substance Analysis',
+          font: {
+            size: 16,
+            weight: 700
+          }
+        },
+      }
+    },
+  };
+
+  //displaying graph
+  new Chart(ctx, config);
 </script>
 
 </html>
