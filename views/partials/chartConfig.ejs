@@ -8,7 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="css/dashboard.css">
-  <title><%= title %></title>
+  <title>
+    <%= title %>
+  </title>
 </head>
 
 <body>
@@ -32,7 +34,7 @@
                   </p>
                   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4 gap-4">
                     <% for(let idx=0;idx<=(values[i].length-1);idx++){ %>
-                      <div>
+                      <div class="shadow-lg">
                         <canvas id="<%= i %>pie<%= idx %>"></canvas>
                       </div>
                       <% } %>
@@ -45,8 +47,31 @@
   </div>
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 <script>
+
+  //code to copy to clipboard
+  new ClipboardJS('#copy');
+
+  let throttle = 0;
+  let copy = document.getElementById("copy");
+  copy.addEventListener("click", () => {
+    if (!throttle) {
+      let old = copy.innerHTML;
+      copy.innerHTML = "Copied!"
+      // copy.classList.add("btn-primary");
+      // copy.classList.remove("btn-outline-primary");
+      throttle = setTimeout(() => {
+        copy.innerHTML = old;
+        // copy.classList.remove("btn-primary");
+        // copy.classList.add("btn-outline-primary");
+        throttle = 0;
+      }, 2000);
+    }
+  });
+
+  //setup for dark mode
   const setup = () => {
     const getTheme = () => {
       if (window.localStorage.getItem('dark')) {
