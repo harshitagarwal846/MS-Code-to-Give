@@ -39,24 +39,23 @@ function find(type, addictions) {
   return i + 1;
 }
 
-async function api_call(response, responseNo) {
-  //response['alcohol']=[1,3];
-  console.log(JSON.stringify(response));
-  await fetch('http://127.0.0.1:3001/predict', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(response)
-  })
-    .then(response => response.json())
-    .then(responseData => {
-      console.log(responseData);
-      saveSurvey(responseData, responseNo);
+async function api_call(user_res, responseNo) {
+   try {
+    const api_response = await fetch('http://127.0.0.1:3001/predict', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user_res)
     })
-    .catch(error => {
-      console.error(error);
-    });
+    const api_responseData = await api_response.json();
+    console.log(api_responseData);
+    const id= await saveSurvey(api_responseData,responseNo);
+    console.log(id);
+    return id;
+  } catch (err) {
+    console.log(err);
+  }
 }
 async function saveSurvey(prediction, userResponse) {
   for (let i = 0; i < prediction.length; i++) {
@@ -78,10 +77,12 @@ async function saveSurvey(prediction, userResponse) {
     alcohol: {
       level: prediction[3],
       response: userResponse['alcohol']
-    }
+    },
+    mood: userResponse['mood']
   })
   const s = await survey.save();
-  console.log(s);
+  console.log(s, s._id);
+  return s._id;
 }
 
-module.exports = {converttoOptionString,converttoOptionNo,find,api_call,saveSurvey}
+module.exports = { converttoOptionString, converttoOptionNo, find, api_call, saveSurvey }

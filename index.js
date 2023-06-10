@@ -78,25 +78,31 @@ app.post('/level2/:type', async (req, res) => {
   console.log(response);
   if (curr == addictions.length) {
     //code for fetching prediction
-    await api_call(response, responseNo);
-    res.redirect('/result');
+    const id = await api_call(response, responseNo);
+    console.log(id);
+    res.redirect(`/result/${id}`);
   } else res.redirect(`${addictions[curr]}`);
 });
 
-app.get('/result', (req, res) => {
-  res.render('./pages/result');
+app.get('/result/:id', (req, res) => {
+  const id = req.params.id;
+  res.render('./pages/result', { id });
 });
+
 app.get('/start', (req, res) => {
   res.render('./pages/intro_q');
 });
 
 app.post('/level1', (req, res) => {
+  response['mood'] = req.body['mood'];
+  responseNo['mood'] = req.body['mood'];
+  console.log(response);
   console.log(req.body);
-  res.redirect('/level2/1');
+  res.send('done');
 });
 
 app.get('/level1', (req, res) => {
-  res.render('./pages/level1', { questions });
+  res.render('./pages/level1');
 });
 
 app.get('/level2/:type', (req, res) => {

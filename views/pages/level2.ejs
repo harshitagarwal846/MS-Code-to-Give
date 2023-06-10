@@ -5,73 +5,132 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="css/output.css" rel="stylesheet"> -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body>
-    <div class="text-5xl font-bold text-center text-gray-800 p-4"><%= questions.name %> addiction?</div>
-    <form action="/level2/<%= questions.name %>" method="POST" novalidate>
-    <% for(let i=1;i<=questions.length;i++) { %>
-    <div class="Q<%= i %> mx-8 my-5 px-10 py-16 p-4 bg-gray-100 rounded-lg shadow">
-        <h2 class="text-lg font-semibold mb-4"><%= questions[i] %></h2>
-        <ul class="questions space-y-2">
-            <li>
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="1">
-                    <span class="ml-2">Yes</span>
-                </label>
-            </li>
-            <li>
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="2">
-                    <span class="ml-2">No</span>
-                </label>
-            </li>
-            <li>
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="3">
-                    <span class="ml-2">Sometimes</span>
-                </label>
-            </li>
-            <div class="float-right">
-                <!-- give submit option here -->
-                <% if(i==questions.length) { %>
-                    <button type="submit" class="mr-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 saveAndnext submit pointer-events-none">
-                        Submit & proceed to next section
-                    </button>
-                <% } %>
-            </div>
-            <li>
-                <label class="inline-flex items-center">
-                    <input type="radio" class="form-radio" name="mcq<%= i %>" value="4">
-                    <span class="ml-2">Prefer not to say</span>
-                </label>
-            </li>
-        </ul>
-
+<body class="bg-purple-100">
+    <div id="loading" class="flex items-center justify-center h-screen hidden">
+        <div class="flex items-center justify-center">
+            <img src="https://media.giphy.com/media/RmvMtf9lKtJjhe4Ggf/giphy.gif" alt="">
+        </div>
     </div>
-    <% } %>
+    <div id="addiction-type" class="hidden">
+        <%= questions.name %>
+    </div>
+    <form action="/level2/<%= questions.name %>" method="POST" novalidate>
+        <div class="w-full h-screen md:w-2/3 mx-auto p-5 bg-white shadow">
+            <button type="submit"
+                class="float-right text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 saveAndnext submit pointer-events-none">
+                <% if(questions.name!=="alcohol" ) { %>
+                    <section>Next Section</section>
+                    <% } else { %>
+                        <section id="addLoading">Submit Survey</section>
+                        <% } %>
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Icon description</span>
+            </button>
+            <div class="flex items-center justify-between">
+                <div class="h-10">
+                    <!-- Heading -->
+                </div>
+            </div>
+            <% for(let i=1;i<=questions.length;i++) { %>
+                <div class="Q<%= i %> mt-8 space-y-8">
+                    <div>
+                        <div class="flex items-start">
+                            <div>
+                                <span
+                                    class="inline-flex justify-center items-center w-6 h-6 rounded bg-green-400 text-white font-medium text-sm">
+                                    Q
+                                </span>
+                            </div>
+
+                            <p class="ml-4 md:ml-6">
+                                <%= questions[i] %>
+                            </p>
+                        </div>
+
+                        <div class="mt-3 questions">
+
+                            <div class="flex justify-between">
+                                <label
+                                    class="flex items-center space-x-2 rounded-lg p-2 hover:bg-blue-100 transition duration-300 my-2 flex-grow">
+                                    <input type="radio" name="mcq<%= i %>" value="1" class="mt-1">
+                                    <span class="cursor-pointer">Yes</span>
+                                </label>
+                                <label
+                                    class="flex items-center space-x-2 rounded-lg p-2 hover:bg-blue-100 transition duration-300 my-2 flex-grow">
+                                    <input type="radio" name="mcq<%= i %>" value="2" class="mt-1">
+                                    <span class="cursor-pointer">No</span>
+                                </label>
+                                <label
+                                    class="flex items-center space-x-2 rounded-lg p-2 hover:bg-blue-100 transition duration-300 my-2 flex-grow">
+                                    <input type="radio" name="mcq<%= i %>" value="2" class="mt-1">
+                                    <span class="cursor-pointer">Sometimes</span>
+                                </label>
+                                <label
+                                    class="flex items-center space-x-2 rounded-lg p-2 hover:bg-blue-100 transition duration-300 my-2 flex-grow">
+                                    <input type="radio" name="mcq<%= i %>" value="4" class="mt-1">
+                                    <span class="cursor-pointer">Prefer not to say</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+        </div>
     </form>
-    <script>
-        const answered=[false,false,false,false,false];
-        const saveAndnext=document.getElementsByClassName('saveAndnext')[0];
-        const questionArr = document.getElementsByClassName('questions');
-        var selected=0;
-        for(let i=0;i<questionArr.length;i++){
-            let options=questionArr[i].getElementsByTagName('input');
-            for(let j=0;j<options.length;j++){
-                options[j].addEventListener('input',()=>{
-                    if(!answered[i]){
-                        selected+=options[j].checked;
-                    }
-                    answered[i]=true;
-                    if(selected==questionArr.length)
-                    saveAndnext.classList.remove('pointer-events-none');
-                });
-            }
-        }
-    </script>
 </body>
+<script>
+    const answered = [false, false, false, false, false];
+    const saveAndnext = document.getElementsByClassName('saveAndnext')[0];
+    const questionArr = document.getElementsByClassName('questions');
+    const addLoading = document.getElementById('addLoading');
+    console.log(saveAndnext, questionArr);
+    var selected = 0;
+    for (let i = 0; i < questionArr.length; i++) {
+        let options = questionArr[i].getElementsByTagName('input');
+        for (let j = 0; j < options.length; j++) {
+            options[j].addEventListener('input', () => {
+                if (!answered[i]) {
+                    selected += options[j].checked;
+                }
+                answered[i] = true;
+                if (selected == questionArr.length) {
+                    saveAndnext.classList.remove('pointer-events-none');
+                }
+            });
+        }
+    }
+    const optionLabels = document.querySelectorAll('.option-label');
+
+    optionLabels.forEach(label => {
+        label.addEventListener('click', () => {
+            // Remove the 'selected' class from all option labels
+            optionLabels.forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add the 'selected' class to the clicked option label
+            label.classList.add('selected');
+        });
+    });
+    const addictionType = (document.getElementById('addiction-type').innerText).trim();
+    console.log(addictionType);
+    if (addictionType == "alcohol") {
+        addLoading.addEventListener('click', () => {
+            document.getElementById('loading').classList.remove('hidden');
+        })
+    }
+
+</script>
+
 </html>
