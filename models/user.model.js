@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
  },
  questionnaireId: {
    type: mongoose.Schema.Types.ObjectId,
-   required: true
+   required: true,
+   ref: 'Addiction'
  },
  password: {
    type: String,

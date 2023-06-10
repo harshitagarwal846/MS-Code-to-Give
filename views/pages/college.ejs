@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <title>
+    College
+  </title>
+</head>
+
+<body>
+  <div x-data="setup()" :class="{ 'dark': isDark }">
+    <div
+      class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
+
+      <!-- Header -->
+      <%- include("../partials/dashboardHeader") %>
+        <!-- ./Header -->
+
+        <!-- Sidebar -->
+        <%- include("../partials/dashboardSidebar") %>
+          <!-- ./Sidebar -->
+          <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+            <div class="m-4">
+              <canvas id="bar"></canvas>
+            </div>
+          </div>
+    </div>
+  </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+<script>
+
+  //setup for dark mode
+  const setup = () => {
+    const getTheme = () => {
+      if (window.localStorage.getItem('dark')) {
+        return JSON.parse(window.localStorage.getItem('dark'))
+      }
+      return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+
+    const setTheme = (value) => {
+      window.localStorage.setItem('dark', value)
+    }
+
+    return {
+      loading: true,
+      isDark: getTheme(),
+      toggleTheme() {
+        this.isDark = !this.isDark
+        setTheme(this.isDark)
+      },
+    }
+  }
+
+  const ctx = document.getElementById('bar');
+
+  let values = '<%- JSON.stringify(values) %>'
+  values = JSON.parse(values);
+  // console.log(values);
+
+  //defining the labels on x-axis
+  const labels = Object.keys(values);
+
+  let barData = [];
+  for (let i = 0; i < 4; i++) {
+    let temp = [];
+    for (const key in values)
+      temp.push(values[key][i]);
+    barData.push(temp);
+  }
+  // console.log(barData)
+
+  //data for each label
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Alcohol',
+        data: barData[0],
+        borderColor: '#36A2EB',
+        backgroundColor: '#9BD0F5',
+      },
+      {
+        label: 'Behavioral',
+        data: barData[1],
+        borderColor: '#FF6384',
+        backgroundColor: '#FFB1C1',
+      },
+      {
+        label: 'Screen',
+        data: barData[2],
+        borderColor: '#00DFA2',
+        backgroundColor: '#00DFA2',
+      },
+      {
+        label: 'Marijuana',
+        data: barData[3],
+        borderColor: '#F6FA70',
+        backgroundColor: '#F6FA70',
+      }
+    ]
+  };
+
+  //configuration of the graph
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              size: 14
+            }
+          }
+        },
+        y: {
+          ticks: {
+            font: {
+              size: 14
+            },
+            stepSize: 1
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            font: {
+              size: 14
+            }
+          }
+        },
+        title: {
+          display: true,
+          text: 'College-wise Analysis',
+          font: {
+            size: 16,
+            weight: 700
+          }
+        },
+      }
+    },
+  };
+
+  //displaying graph
+  new Chart(ctx, config);
+</script>
+
+</html>
