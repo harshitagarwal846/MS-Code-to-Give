@@ -110,6 +110,10 @@ app.get('/home', (req, res) => {
   res.render('./pages/home.ejs');
 });
 
+app.get('/resources', (req, res) => {
+  res.render('./pages/resources.ejs');
+});
+
 app.get('/dashboard', async (req, res) => {
   //no,mild,severe
   let values = {
