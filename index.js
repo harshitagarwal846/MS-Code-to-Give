@@ -20,6 +20,7 @@ const {
   saveSurvey,
 } = require('./functions');
 const Addiction = require('./models/response.model');
+const User = require('./models/user.model');
 // routes
 const authRoutes = require('./routes/auth.route');
 const { func } = require('joi');
@@ -138,7 +139,10 @@ app.get('/dashboard', async (req, res) => {
       }
     }
 
-    res.render('./pages/dashboard.ejs', { values });
+    const totalSurvey = await Addiction.countDocuments({});
+    const totalEnroll = await User.countDocuments({});
+
+    res.render('./pages/dashboard.ejs', { values, totalSurvey, totalEnroll });
   } catch (err) {
     console.log(err);
   }
@@ -148,7 +152,7 @@ app.get('/admin', (req, res) => {
   res.render('./pages/admin.ejs');
 });
 
-app.get('/dashboard/:substance', async (req, res) => {
+app.get('/dashboard/cat/:substance', async (req, res) => {
   let sub = req.params.substance;
   let values = {
     1: [
@@ -194,6 +198,78 @@ app.get('/dashboard/:substance', async (req, res) => {
       }
     }
     res.render(`./pages/${sub}`, { questions: all_questions[sub], values });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/dashboard/college', async (req, res) => {
+  try {
+    const colleges = ['ABC college', 'PQR college', 'XYZ college', 'Other'];
+    const sub = ['alcohol', 'behaviour', 'screen', 'marijuana'];
+    let obj = {};
+    colleges.forEach((college) => {
+      Object.assign(obj, { [`${college}`]: [0, 0, 0, 0] });
+    });
+    // console.log(obj);
+    for (const key in obj) {
+      const data = await User.find(
+        { college: key },
+        { _id: 0, questionnaireId: 1 }
+      );
+      // console.log(key, data);
+      data.forEach(async (objId) => {
+        // console.log(objId.questionnaireId);
+        const data = await Addiction.findById(
+          mongoose.Types.ObjectId(objId.questionnaireId)
+        );
+        if (!data) return;
+        console.log(data);
+        for (let i = 0; i < sub.length; i++) {
+          const cat = sub[i];
+          // console.log(cat);
+          if (data[cat].level == 2) obj[key][i]++;
+        }
+      });
+    }
+    // console.log(obj);
+    res.render('./pages/college', { values: obj });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.get('/dashboard/gender', async (req, res) => {
+  try {
+    const genders = ['Male', 'Female', 'Other'];
+    const sub = ['alcohol', 'behaviour', 'screen', 'marijuana'];
+    let obj = {};
+    genders.forEach((gender) => {
+      Object.assign(obj, { [`${gender}`]: [0, 0, 0, 0] });
+    });
+    // console.log(obj);
+    for (const key in obj) {
+      const data = await User.find(
+        { gender: key },
+        { _id: 0, questionnaireId: 1 }
+      );
+      // console.log(key, data);
+      data.forEach(async (objId) => {
+        // console.log(objId.questionnaireId);
+        const data = await Addiction.findById(
+          mongoose.Types.ObjectId(objId.questionnaireId)
+        );
+        if (!data) return;
+        // console.log(data);
+        for (let i = 0; i < sub.length; i++) {
+          const cat = sub[i];
+          // console.log(cat);
+          if (data[cat].level == 2) obj[key][i]++;
+        }
+      });
+    }
+    // console.log(obj);
+    res.render('./pages/gender', { values: obj });
   } catch (err) {
     console.log(err);
   }
