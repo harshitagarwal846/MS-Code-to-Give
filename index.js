@@ -239,7 +239,7 @@ app.get('/dashboard/college', async (req, res) => {
           mongoose.Types.ObjectId(objId.questionnaireId)
         );
         if (!data) return;
-        console.log(data);
+        // console.log(data);
         for (let i = 0; i < sub.length; i++) {
           const cat = sub[i];
           // console.log(cat);
@@ -247,7 +247,7 @@ app.get('/dashboard/college', async (req, res) => {
         }
       });
     }
-    // console.log(obj);
+    console.log(obj);
     res.render('./pages/college', { values: obj });
   } catch (err) {
     console.log(err);
@@ -283,7 +283,7 @@ app.get('/dashboard/gender', async (req, res) => {
         }
       });
     }
-    // console.log(obj);
+    console.log(obj);
     res.render('./pages/gender', { values: obj });
   } catch (err) {
     console.log(err);
