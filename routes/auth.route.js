@@ -9,8 +9,11 @@ const {
   loginWithPhoneOtp,
   fetchCurrentUser,
   verifyPhoneOtp,
+  loginwithpassword,
 } = require('../controllers/auth.controller');
 
+
+router.post('/login',loginwithpassword);
 router.post('/login_with_phone', loginWithPhoneOtp);
 router.post('/register', createNewUser);
 

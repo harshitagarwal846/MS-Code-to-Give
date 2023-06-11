@@ -7,7 +7,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
 const fetch = require('node-fetch');
-
+const bcrypt = require('bcrypt');
 const { PORT, MONGODB_URI, NODE_ENV, ORIGIN } = require('./config');
 const { API_ENDPOINT_NOT_FOUND_ERR, SERVER_ERR } = require('./errors');
 
@@ -27,6 +27,11 @@ const { func } = require('joi');
 
 // init express app
 const app = express();
+app.use(session({
+  secret: 'thisissecret', // Secret key for session encryption
+  resave: false, // Set to false to prevent session from being saved on each request
+  saveUninitialized: false // Set to false to prevent uninitialized sessions from being saved
+}));
 
 // middlewares
 
@@ -64,6 +69,16 @@ app.get('/', (req, res) => {
 });
 
 // routes middlewares
+const isAuthenticated = (req, res, next) => {
+  // Check if the user is authenticated (e.g., by checking the session or token)
+  if (req.session.user) {
+    // User is authenticated, proceed to the next middleware or route handler
+    next();
+  } else {
+    // User is not authenticated, redirect to login or show an error page
+    res.redirect('/home');
+  }
+}
 
 const response = {}; //yesno
 const responseNo = {}; //1,2,3,4
@@ -273,6 +288,37 @@ app.get('/dashboard/gender', async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.get('/login',(req,res)=>{
+  if(req.session.user){
+    res.redirect('/home/signedIn');
+    return;
+  }
+  res.render('./pages/login');
+})
+app.get('/register', (req, res) => {
+  if(req.session.user){
+    res.redirect('/home/signedIn');
+    return
+  }
+  res.render('./pages/register')
+})
+
+app.get('/home/signedIn', isAuthenticated, (req, res) => {
+  res.render('./pages/authHome');
+})
+
+app.get('/logout', function(req, res) {
+  // Destroy the session or clear the token
+  req.session.destroy(function(err) {
+    if (err) {
+      console.error('Error destroying session:', err);
+    } else {
+      // Redirect to the login page or any other desired location
+      res.redirect('/home');
+    }
+  });
 });
 
 // page not found error handling  middleware
