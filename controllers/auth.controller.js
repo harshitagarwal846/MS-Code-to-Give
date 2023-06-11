@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user.model');
+const Admin = require('../models/admin.model')
 const {
   PHONE_NOT_FOUND_ERR,
   PHONE_ALREADY_EXISTS_ERR,
@@ -10,8 +11,18 @@ const {
 const { createJwtToken } = require('../utils/token.util');
 const { generateOTP, fast2sms } = require('../utils/otp.util');
 const { use } = require('../routes/auth.route');
-
+const ObjectId = require('mongoose').Types.ObjectId;
 // --------------------- create new user ---------------------------------
+
+function isValidObjectId(id) {
+
+  if (ObjectId.isValid(id)) {
+    if ((String)(new ObjectId(id)) === id)
+      return true;
+    return false;
+  }
+  return false;
+}
 
 exports.createNewUser = async (req, res, next) => {
   try {
@@ -40,16 +51,28 @@ exports.createNewUser = async (req, res, next) => {
     }
     password = await bcrypt.hash(password, 10);
     // create new user
-    const createUser = new User({
-      name,
-      phoneNumber,
-      college,
-      gender,
-      hasBeenToCounseling,
-      hasBeenToRehabilitation,
-      questionnaireId,
-      password,
-    });
+    if (isValidObjectId(questionnaireId)) {
+      var createUser = new User({
+        name,
+        phoneNumber,
+        college,
+        gender,
+        hasBeenToCounseling,
+        hasBeenToRehabilitation,
+        questionnaireId,
+        password,
+      });
+    } else {
+      var createUser = new User({
+        name,
+        phoneNumber,
+        college,
+        gender,
+        hasBeenToCounseling,
+        hasBeenToRehabilitation,
+        password,
+      });
+    }
     console.log(createUser);
     // save user
     const user = await createUser.save();
@@ -194,5 +217,44 @@ exports.handleAdmin = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.createAdmin = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    var { email, password } = req.body;
+    console.log(email, password, "here");
+    password = await bcrypt.hash(password, 10);
+    const createAdmin = new Admin({ email, password });
+    const admin = await createAdmin.save();
+    console.log("admin created", admin);
+    res.redirect('/dashboard');
+    return;
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.loginAdmin = async (req, res, next) => {
+  try {
+    console.log("started");
+    const { email, password } = req.body;
+    console.log(email, password, "here");
+    const admin = await Admin.findOne({ email });
+
+    if (!admin) {
+      next({ status: 400, message: ADMIN_NOT_FOUNd });
+      return;
+    }
+    const match = await bcrypt.compare(password, admin.password);
+    if (match || admin.password === password) {
+      req.session.user = "admin";
+      console.log("admin logged in");
+      res.redirect("/dashboard");
+      return;
+    }
+  } catch (error) {
+
+  }
+}
 
 

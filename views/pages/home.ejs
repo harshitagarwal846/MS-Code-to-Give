@@ -14,10 +14,13 @@
     <%- include("../partials/navbar") %>
         <section class="container px-4 md:pl-20 py-16 mx-auto lg:h-128 lg:space-x-8 lg:flex lg:items-center">
             <div class="w-full text-center lg:text-left lg:w-1/2 lg:-mt-8">
-                <h1 class="text-3xl leading-snug text-gray-800 dark:text-gray-200 md:text-4xl">
+                <!-- <h1 class="text-3xl leading-snug text-gray-800 dark:text-gray-200 md:text-4xl">
                     A <span class="font-semibold">free repository</span> for community <br class="hidden lg:block">
-                    components using <span class="font-semibold underline decoration-primary">Tailwind CSS</span></h1>
-                <p class="mt-4 text-lg text-gray-500 dark:text-gray-300">Feeling over-dependent on a substance and being
+                    components using <span class="font-semibold underline decoration-primary">Tailwind CSS</span></h1> -->
+                <!-- <h1>
+                    From Struggle to strength: Unleshing innovation in Drug Addiction Solutions
+                </h1> -->
+                <p class="mt-4 font-bold text-lg text-gray-500 dark:text-gray-300">Feeling over-dependent on a substance and being
                     unable to get rid of it? We provide rehabilitation and mentoring programs to help get rid of
                     this entaglement. </p>
                 <a href="/start">
@@ -34,6 +37,84 @@
             <div class="w-full mt-4 lg:mt-0 lg:w-1/2"><img src="/images/hero.svg" alt="mental health"
                     class="w-full h-full max-w-md mx-auto"></div>
         </section>
+        <div class="flex items-center justify-center flex-col bg-[#E5E5E5]">
+            <!-- main card -->
+            <div class="bg-[#F4F5FA] p-10 rounded-xl">
+                <!-- headers content-->
+                <!-- <div class="flex flex-col justify-center items-center text-center">
+                    <div class="max-w-sm font-bold font-sans">
+                        Success Stories
+                    </div>
+                    <div class="font-light max-w-lg mt-5 text-sm">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, vitae.
+                    </div>
+                </div>  -->
+                <%- include("../partials/heading", {heading:"Success Stories"}) %>
+
+                <!-- subscriptions -->
+                <div
+                    class="flex flex-col md:flex-row space-x-0 md:space-x-8 space-y-12  md:space-y-0 justify-center items-center mt-10">
+                    <div class="bg-[#FFFBEC] rounded-xl">
+                        <div
+                            class="flex flex-col p-8 rounded-xl bg-white shadow-xl translate-x-4 translate-y-4 w-96 md:w-auto">
+                            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Ice_logo.svg/138px-Ice_logo.svg.png?20191213230535" class="w-8"> -->
+                            <div class="mt-3 font-semibold text-lg">Anonymous</div>
+                            <p>
+                                An individual struggled with severe drug addiction for several years. They experienced
+                                significant physical and mental health issues and had strained relationships with family
+                                and friends. Seeking a fresh start, they enrolled in a comprehensive rehabilitation
+                                program that provided medical detoxification, counseling, and support groups. Through
+                                their dedication and the assistance of the rehab professionals, they successfully
+                                completed the program and embraced a drug-free lifestyle. They rebuilt relationships
+                                with loved ones, pursued education, and secured stable employment, becoming an
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F9ECFF] rounded-xl">
+                        <div
+                            class="flex flex-col p-8 rounded-xl bg-white shadow-xl translate-x-4 translate-y-4 w-96 md:w-auto">
+                            <!-- <img src="https://www.dstny.se/app/uploads/telia_pp_rgb.png.webp" class="w-12"> -->
+                            <div class="mt-3 font-semibold text-lg">Anonymous</div>
+                            <p>
+                                A person battled alcohol addiction, which had taken a toll on their personal
+                                and professional life. Recognizing the need for change, they committed themselves to an
+                                intensive alcohol rehabilitation program. During their time in rehab, they underwent
+                                therapy sessions, attended support groups, and developed coping strategies to resist
+                                temptation. As a result, they achieved sobriety and discovered newfound clarity and
+                                purpose. They rebuilt trust with their family and friends, achieved career advancements,
+                                and actively engaged in community service to help others struggling with alcohol
+                                addiction.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="bg-[#ECEEFF] rounded-xl">
+                        <div
+                            class="flex flex-col p-8 rounded-xl bg-white shadow-xl translate-x-4 translate-y-4 w-96 md:w-auto">
+                            <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Telenor_Logo.svg/1600px-Telenor_Logo.svg.png" class="w-12"> -->
+                            <div class="mt-3 font-semibold text-lg">Anonymous</div>
+                            <p>
+                                An individual had become deeply entrenched in screen addiction, spending excessive hours
+                                every day engrossed in digital devices and neglecting their personal relationships and
+                                responsibilities. Recognizing the detrimental impact on their well-being, they sought
+                                help through a specialized rehabilitation program for screen addiction. The program
+                                included counseling, behavioral therapy, and gradual reduction of screen time. With
+                                perseverance and a strong support system, they successfully overcame their screen
+                                addiction and reestablished a healthy balance in their life. They rediscovered their
+                                passions, strengthened their relationships, and engaged in offline activities that
+                                brought them joy and fulfillment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="flex justify-center">
+                    <button class="mt-12 bg-slate-900 text-white px-4 rounded-full py-3">See all subscriptions</button>
+                </div> -->
+            </div>
+        </div>
         <%- include("../partials/footer") %>
 
 </body>

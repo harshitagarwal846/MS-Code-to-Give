@@ -10,6 +10,8 @@ const {
   fetchCurrentUser,
   verifyPhoneOtp,
   loginwithpassword,
+  createAdmin,
+  loginAdmin
 } = require('../controllers/auth.controller');
 
 
@@ -21,6 +23,8 @@ router.post('/verify', verifyPhoneOtp);
 
 router.get('/me', checkAuth, fetchCurrentUser);
 
-router.get('/admin', checkAuth, checkAdmin, handleAdmin);
+// router.get('/admin', checkAuth, checkAdmin, handleAdmin);
 
+router.post('/admin/register',createAdmin);
+router.post('/admin/login',loginAdmin);
 module.exports = router;

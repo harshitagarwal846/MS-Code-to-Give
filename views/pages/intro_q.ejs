@@ -10,31 +10,77 @@
 
 <body>
     <%- include("../partials/navbar") %>
-        <section class="container px-4 md:pl-20 py-16 mx-auto lg:h-128 lg:space-x-8 lg:flex lg:items-center">
-            <div class="w-full text-center lg:text-left lg:w-1/2 lg:-mt-8">
-                <a href="/level1">
-                    <div
-                        class="mt-6 border dark:border-gray-700 lg:w-2/3 rounded-lg bg-sky-400 hover:cursor-pointer hover:bg-sky-500 p-3 text-lg md:text-2xl hover:scale-x-[1.05] ease-in duration-200">
-                        1 optional question<svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                        </svg>
-                    </div>
-                </a>
-                <a href="/level2/screen">
-                    <div
-                        class="mt-6 border dark:border-gray-700 lg:w-2/3 rounded-lg bg-sky-400 hover:cursor-pointer hover:bg-sky-500 p-3 text-lg md:text-2xl hover:scale-x-[1.05] ease-in duration-200">
-                        mandatory questions<svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                        </svg>
-                    </div>
-                </a>
+        <section class="container px-4 md:pl-20 py-16 mx-auto lg:space-x-8">
+            <div class="w-full text-center lg:text-left lg:-mt-8>
+                <div class="mx-auto p-4 bg-white">
+                    <p class="text-l text-gray-800 rounded-lg">Dear Participant,</p>
+                    <br>
+                    <p class="text-l text-gray-800 rounded-lg text-justify">
+                        Thank you for participating in our questionnaire. We appreciate your willingness to share your
+                        insights and opinions. We want to assure you that we respect your privacy and understand that
+                        some
+                        questions may be more sensitive or personal than others.
+                    </p>
+                    <br>
+                    <p class="text-l text-gray-800 rounded-lg text-justify">
+                        <span class="font-bold">Please note that the questionnaire consists of two parts: optional and
+                            mandatory questions. The
+                            optional questions are designed to gather additional information that could provide deeper
+                            insights
+                            into the subject matter. You have the freedom to skip any of these optional questions if you
+                            prefer
+                            not to answer them.
+                            In the mandatory section, we kindly request that you answer as many questions as possible.
+                            However,
+                            we understand that there may be certain questions that you feel uncomfortable answering.
+                            For these questions, we have provided a "Prefer Not to Say" option to respect your privacy and ensure your comfort. You are welcome to select this option if you do not wish to provide an answer.
+                            Please
+                            know
+                            that we will not judge you or hold any negative opinions if you choose to omit or skip any
+                            mandatory
+                            questions. Your participation and comfort are our top priorities.</span>
+                    </p>
+                    <br>
+                    <p class="text-l text-gray-800 rounded-lg text-justify">
+                        We assure you that all the information you provide, whether mandatory or optional, will be
+                        treated
+                        with strict confidentiality. The data collected will be used solely for your evaluation and research purposes;
+                        reported in an aggregated and anonymous format. Your individual responses will not be
+                        identifiable.
+                    </p>
+                    <br>
+                    <!-- <p class="text-l text-gray-800 rounded-lg">
+                        We greatly appreciate your understanding and cooperation. Your participation will significantly
+                        contribute to the success of our study. If you have any concerns or questions, please feel free
+                        to
+                        reach out to us. We are here to support you and ensure a positive and respectful experience.
+                    </p> -->
+                </div>
+                <div class="flex justify-between py-5">
+                    <a href="/level1"
+                        class="mt-6 border dark:border-gray-700 lg:w-1/3 rounded-lg bg-sky-400 hover:cursor-pointer hover:bg-sky-500 p-3 text-lg md:text-2xl hover:scale-x-[1.05] ease-in duration-200">
+                        <div>
+                            Optional questions<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="/level2/screen"
+                        class="mt-6 border dark:border-gray-700 lg:w-1/3 rounded-lg bg-sky-400 hover:cursor-pointer hover:bg-sky-500 p-3 text-lg md:text-2xl hover:scale-x-[1.05] ease-in duration-200">
+                        <div>
+                            mandatory questions<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-11 inline p-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div class="w-full mt-4 lg:mt-0 lg:w-1/2"><img src="/images/hero.svg" alt="mental health"
-                    class="w-full h-full max-w-md mx-auto"></div>
+            <!-- <div class="w-full mt-4 lg:mt-0 lg:w-1/2"><img src="/images/hero.svg" alt="mental health"
+                    class="w-full h-full max-w-md mx-auto"></div> -->
         </section>
         <%- include("../partials/footer") %>
 

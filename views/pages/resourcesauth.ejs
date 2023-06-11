@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Resources</title>
+</head>
+
+<body>
+  <%- include("../partials/navbarauth") %>
+
+    <div class='flex flex-col justify-start items-center min-h-screen'>
+      <%- include("../partials/heading", {heading:"drug guide"}) %>
+        <p id="drug" class="p-4 m-4 text-lg text-justify">Welcome to our thorough Drug Guide, your go-to source for
+          crucial drug
+          knowledge. Our guide offers a
+          comprehensive
+          summary of many medications, including their purposes, side effects, and dose guidelines, whether you're a
+          healthcare
+          expert or a curious person looking for trustworthy drug information. Utilize our user-friendly Drug Guide to
+          be informed
+          and make wise prescription selections. Give yourself the information you need to comprehend any medications
+          you or a
+          loved one may be taking.</p>
+
+        <!-- tobacco -->
+        <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Tobacco/Nicotine</div>
+        <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+          <div class="w-full lg:mt-0 md:w-2/5">
+            <img src="images/tobacco.jpg" alt="tobacco" class="w-full h-full max-w-md mx-auto">
+          </div>
+          <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+            <p>
+              Tobacco and vaping devices contain nicotine, an ingredient that can lead to addiction, which is why so
+              many
+              people who
+              smoke or vape find it difficult to quit. Both tobacco and vaping devices contain other harmful chemicals;
+              burning
+              tobacco can create these chemicals and vaping devices turn chemicals and flavorings into mist that
+              combines
+              with
+              synthetic nicotine.
+            </p>
+            <p><span class="font-bold underline">Symptoms:</span> Headache, Nausea, Constipation or diarrhea, Falling
+              heart rate and blood pressure, Fatigue, drowsiness, and insomnia, etc.</p>
+            <p><span class="font-bold underline">Fact:</span> Of all adults, 28.6% currently consume tobacco either in
+              smoke or smokeless form, including 42.4% of men and 14.2% of
+              women. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7942198/" target="_blank"
+                class="underline text-[#0000EE]">(Source)</a></p>
+            <p><span class="font-bold underline">Related Links:</span>
+            <ul class="list-disc">
+              <li>
+                <a href="https://nida.nih.gov/research-topics/tobacconicotine-vaping" target="_blank"
+                  class="underline text-[#0000EE]">https://nida.nih.gov/research-topics/tobacconicotine-vaping</a>
+              </li>
+              <li>
+                <a href="https://rehabs.in/indian-drug-guide/nicotine-2/" target="_blank"
+                  class="underline text-[#0000EE]">https://rehabs.in/indian-drug-guide/nicotine-2/</a>
+              </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+
+        <!-- marijuana -->
+        <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Marijuana</div>
+        <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+          <div class="w-full lg:mt-0 md:w-2/5">
+            <img src="images/marijuana.svg" alt="marijuana" class="w-full h-full max-w-md mx-auto">
+          </div>
+          <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+            <p>
+              Also known as ganja, pot, herb, grass, kif, weed, Mary Jane, reefer, skunk, chronic, boom, and gangster;
+              Marijuana is a
+              drug commonly abused throughout India. A blend of stems, seeds, and leaves from the cannabis sativa plant
+              combine to
+              create the drug. Modes of delivery vary from mixing it with foods, to brewing it as tea. But the most
+              common way of administrating the
+              drug is by smoking. Typically smoked as a cigarette or in a pipe, Marijuana is easily disguised and thus
+              readily
+              available in most of the urban areas.
+            </p>
+            <p><span class="font-bold underline">Symptoms:</span> Bloodshot eyes, Smells like marijuana (sweet smell),
+              Drowsiness, Uncoordinated and awkward movements, Giggling or being silly, etc.
+              heart rate and blood pressure, Fatigue, drowsiness, and insomnia</p>
+            <p><span class="font-bold underline">Fact:</span> The Cannabis market in India is projected to grow by
+              17.01% (2023-2027) resulting in a market volume of US$155.70m in
+              2027. <a href="https://www.statista.com/outlook/hmo/cannabis/india" target="_blank"
+                class="underline text-[#0000EE]">(Source)</a></p>
+            <p><span class="font-bold underline">Related Links:</span>
+            <ul class="list-disc">
+              <li>
+                <a href="https://nida.nih.gov/publications/drugfacts/cannabis-marijuana" target="_blank"
+                  class="underline text-[#0000EE]">https://nida.nih.gov/publications/drugfacts/cannabis-marijuana</a>
+              </li>
+              <li>
+                <a href="https://rehabs.in/indian-drug-guide/marijuana/" target="_blank"
+                  class="underline text-[#0000EE]">https://rehabs.in/indian-drug-guide/marijuana/</a>
+              </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+
+        <!-- Alcohol -->
+        <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Alcohol</div>
+        <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+          <div class="w-full lg:mt-0 md:w-2/5">
+            <img src="images/alcohol.svg" alt="alcohol" class="w-full h-full max-w-md mx-auto">
+          </div>
+          <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+            <p>
+              The availability and social acceptance of alcohol makes it one of the most commonly consumed intoxicating
+              substances on
+              earth. Alcohol interferes with the brain’s communication pathways and can affect the way the brain looks
+              and
+              works. Alcohol
+              makes it harder for the brain areas controlling balance, memory, speech, and judgment to do their jobs,
+              resulting
+              in a
+              higher likelihood of injuries and other negative outcomes.
+            </p>
+            <p><span class="font-bold underline">Symptoms:</span> Experiences anxiety, Performing poorly at work,
+              Demonstrates
+              poor judgment and decisions, Displays abnormalities of skin, eyes, coordination, and/or speech pattern,
+              etc.</p>
+            <p><span class="font-bold underline">Fact:</span> According to the 2021 National Survey on Drug Use and
+              Health
+              (NSDUH), 49.3% of full-time college students ages 18 to 22
+              drank alcohol in the past month; and, of those, about 27.4% engaged in binge drinking during that same
+              time frame.
+              <a href="https://www.niaaa.nih.gov/publications/brochures-and-fact-sheets/college-drinking"
+                target="_blank" class="underline text-[#0000EE]">(Source)</a>
+            </p>
+            <p><span class="font-bold underline">Related Links:</span>
+            <ul class="list-disc">
+              <li>
+                <a href="https://www.niaaa.nih.gov/alcohols-effects-health" target="_blank"
+                  class="underline text-[#0000EE]">https://www.niaaa.nih.gov/alcohols-effects-health</a>
+              </li>
+              <li>
+                <a href="https://rehabs.in/indian-drug-guide/alcohol/" target="_blank"
+                  class="underline text-[#0000EE]">https://rehabs.in/indian-drug-guide/alcohol/</a>
+              </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+
+
+        <!-- cocaine -->
+        <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Cocaine</div>
+        <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+          <div class="w-full lg:mt-0 md:w-2/5">
+            <img src="images/cocaine.jpg" alt="cocaine" class="w-full h-full max-w-md mx-auto">
+          </div>
+          <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+            <p>
+              Derived from the coca plant, cocaine is usually sold as a fine white powder (hydrocholride salt). The
+              powder can be
+              dissolved and injected into a vein, or kept dry and sniffed through the nose. Sniffing, also called
+              blowing or snorting
+              cocaine is the most popular method used. Pure cocaine is odourless. However, most cocaine is adulterated
+              in some way or
+              “cut” with different fillers. Street dealers often mix it with things like cornstarch, talcum powder, or
+              flour to increase profits.
+            </p>
+            <p><span class="font-bold underline">Symptoms:</span> Fast speech or talkativeness, Increased heart rate and
+              blood pressure, Dilated pupils, Panic, etc.</p>
+            <p><span class="font-bold underline">Fact:</span> The number of deaths from cocaine overdose in the United
+              States was almost 24,500 in 2021. <a
+                href="https://www.statista.com/statistics/611237/cocaine-deaths-us-number/" target="_blank"
+                class="underline text-[#0000EE]">(Source)</a></p>
+            <p><span class="font-bold underline">Related Links:</span>
+            <ul class="list-disc">
+              <li>
+                <a href="https://nida.nih.gov/publications/drugfacts/cocaine" target="_blank"
+                  class="underline text-[#0000EE]">https://nida.nih.gov/publications/drugfacts/cocaine</a>
+              </li>
+              <li>
+                <a href="https://rehabs.in/indian-drug-guide/cocaine/" target="_blank"
+                  class="underline text-[#0000EE]">https://rehabs.in/indian-drug-guide/cocaine/</a>
+              </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+
+        <!-- Heroin -->
+        <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Heroin</div>
+        <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+          <div class="w-full lg:mt-0 md:w-2/5">
+            <img src="images/heroin.jpeg" alt="heroin" class="w-full h-full max-w-md mx-auto">
+          </div>
+          <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+            <p>
+              Heroin is an opioid drug made from morphine, a natural substance taken from the seed pod of the various
+              opium poppy
+              plants grown in Southeast and Southwest Asia, Mexico, and Colombia. Though appraised as an illegal drug,
+              heroin's highly addictive nature continues to give it a worldwide market. Known for
+              the intense rush felt shortly after intake, heroin presents a threat to the human body on a number of
+              levels.
+              Commonly known as dope, big H, Dr Feelgood, smack, thunder, mud, skag, and brown sugar, this
+              semi-synthetic drug,
+              derived from morphine and extracted from poppy plants, has a distinctive ability to control its abuser.
+            </p>
+            <p><span class="font-bold underline">Symptoms:</span> Runny nose, coughing, sneezing, fever, chills, Mental
+              confusion, Poor appetite, Vomiting, etc.</p>
+            <p><span class="font-bold underline">Fact:</span> The number of heroin-involved overdose deaths was nearly
+              seven times higher in 2020 than in 1999. <a
+                href="https://www.cdc.gov/drugoverdose/deaths/heroin/index.html" target="_blank"
+                class="underline text-[#0000EE]">(Source)</a></p>
+            <p><span class="font-bold underline">Related Links:</span>
+            <ul class="list-disc">
+              <li>
+                <a href="https://nida.nih.gov/publications/drugfacts/heroin" target="_blank"
+                  class="underline text-[#0000EE]">https://nida.nih.gov/publications/drugfacts/heroin</a>
+              </li>
+              <li>
+                <a href="https://rehabs.in/indian-drug-guide/heroin/" target="_blank"
+                  class="underline text-[#0000EE]">https://rehabs.in/indian-drug-guide/heroin/</a>
+              </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+
+        <%- include("../partials/heading", {heading:"Other Inclinations"}) %>
+          <p id="other" class="p-4 m-4 text-lg text-justify">We are aware that addiction can go beyond drug usage.
+            Because of this,
+            we also offer
+            insightful information about other forms of compulsion such as Behavioral and Screen inclinations. Our
+            in-depth tools provide
+            information on
+            detection, prevention, and therapy. Our mission is to empower people and their support networks by offering
+            guidance and
+            assistance for addictive behaviors.</p>
+
+          <!-- Behavioral -->
+          <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Behavioral Addiciton</div>
+          <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+            <div class="w-full lg:mt-0 md:w-2/5">
+              <img src="images/behavioral.png" alt="behavioral" class="w-full h-full max-w-md mx-auto">
+            </div>
+            <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+              <p>
+                The term "behavioral addiction" describes compulsive, repetitive behaviors that people engage in despite
+                unfavorable
+                effects. Unlike drug addiction, behavioral addictions are characterized by an obsession with a
+                particular activity or
+                set of behaviors, such as online gaming, shopping, or gambling. These addictions have the potential to
+                significantly
+                affect a person's personal, social, and professional lives. People may suffer intense cravings, symptoms
+                of withdrawal,
+                and an inability to restrain or stop their addictive behavior. Understanding the underlying causes of
+                behavioral
+                addictions and obtaining the proper support and therapy are crucial first steps in managing and
+                overcoming these
+                difficulties.
+              </p>
+              <p><span class="font-bold underline">Fact:</span> In 2022, the overall prevalence of behavioral addiction
+                irrespective of addiction type
+                was 11.1%, the most prevalent being smartphone addiction (contributing more than 30%) <a
+                  href="https://pubmed.ncbi.nlm.nih.gov/36118286/#:~:text=A%20total%20of%2094%20studies,CI%3A%205.4%20to%2016.8%25)."
+                  target="_blank" class="underline text-[#0000EE]"> (Source)</a></p>
+              <p><span class="font-bold underline">Related Links:</span>
+              <ul class="list-disc">
+                <li>
+                  <a href="https://www.addictioncenter.com/addiction/behavioral-addictions/" target="_blank"
+                    class="underline text-[#0000EE]">https://www.addictioncenter.com/addiction/behavioral-addictions/</a>
+                </li>
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3354400/" target="_blank"
+                    class="underline text-[#0000EE]">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3354400/</a>
+                </li>
+              </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- screen -->
+          <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Device Screen</div>
+          <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+            <div class="w-full lg:mt-0 md:w-2/5">
+              <img src="images/screen.jpg" alt="screen" class="w-full h-full max-w-md mx-auto">
+            </div>
+            <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+              <p>
+                The excessive and compulsive use of digital gadgets like smartphones, tablets, and laptops is called
+                device screen
+                addiction, also known as screen or technology addiction. This addiction can result in focusing on
+                screen-related
+                activities that frequently precede other significant facets of life. People could struggle to control
+                their screen time,
+                feel restless or irritable while not utilizing their devices, and disregard their obligations or
+                relationships.
+                Addiction to electronic screens can have a severe influence on productivity, sleep, and mental health.
+                The first stages
+                in managing this addiction and developing a more harmonious relationship with technology are recognizing
+                the warning
+                signals, setting limits, and forming healthy screen habits.
+              </p>
+              <p><span class="font-bold underline">Fact:</span> Tech addiction statistics show that people in the 8-28
+                age group spend about 44.5 hours a week staring at a screen.
+                That's more than most full-time jobs demand of their employees! <a
+                  href="https://webtribunal.net/blog/tech-addiction-facts/" target="_blank"
+                  class="underline text-[#0000EE]"> (Source)</a></p>
+              <p><span class="font-bold underline">Related Links:</span>
+              <ul class="list-disc">
+                <li>
+                  <a href="https://www.addictioncenter.com/drugs/phone-addiction/" target="_blank"
+                    class="underline text-[#0000EE]">https://www.addictioncenter.com/drugs/phone-addiction/</a>
+                </li>
+                <li>
+                  <a href="https://share.upmc.com/2022/06/unplugged-breaking-your-screen-addiction/" target="_blank"
+                    class="underline text-[#0000EE]">https://share.upmc.com/2022/06/unplugged-breaking-your-screen-addiction/</a>
+                </li>
+              </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- relationship -->
+          <div class="px-2 m-2 text-3xl font-bold underline" style="width: 96%;">Relationship Addiction</div>
+          <div class="flex flex-col md:flex-row border-solid border-2 rounded-md shadow-lg p-4 m-4" style="width: 96%;">
+            <div class="w-full lg:mt-0 md:w-2/5">
+              <img src="images/relation.jpg" alt="relationship" class="w-full h-full max-w-md mx-auto">
+            </div>
+            <div class="p-3 md:w-3/5 text-justify text-lg break-words">
+              <p>
+                Overwhelming reliance on romantic relationships for emotional fulfillment and a sense of self-worth is
+                referred to as
+                relationship addiction, also known as love addiction or codependency. People battling relationship
+                addiction frequently
+                have a severe fear of abandonment, a tendency to get into codependent or unhealthy relationships, and
+                difficulty
+                establishing healthy boundaries. They might put their partner's demands above their own, disregard their
+                health, and
+                struggle to function independently. A loop of destructive relationships, mental distress, and a lack of
+                self-identity
+                can result from relationship addiction. To break free from relationship addiction and promote personal
+                growth, it is
+                crucial to identify and treat the root causes, look for therapy or support groups, and learn how to
+                nurture self-love
+                and healthy connections.
+              </p>
+              <p><span class="font-bold underline">Fact:</span> In 2011, over 10% of murders in the United States were
+                committed by the victim's lover. When relationships come to an unwanted end, we feel pain, grief, and
+                loss. <a
+                  href="http://www.fbi.gov/about-us/cjis/ucr/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/expanded-homicide-data-table-10"
+                  target="_blank" class="underline text-[#0000EE]"> (Source)</a></p>
+              <p><span class="font-bold underline">Related Links:</span>
+              <ul class="list-disc">
+                <li>
+                  <a href="https://www.addictioncenter.com/drugs/relationship-addiction/" target="_blank"
+                    class="underline text-[#0000EE]">https://www.addictioncenter.com/drugs/relationship-addiction/</a>
+                </li>
+                <li>
+                  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5378292/" target="_blank"
+                    class="underline text-[#0000EE]">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5378292/</a>
+                </li>
+              </ul>
+              </p>
+            </div>
+          </div>
+
+          <%- include("../partials/heading", {heading:"Groups/Communities"}) %>
+            <p id="groups" class="p-4 m-4 text-lg text-justify">In addition to our materials, we also provide a
+              welcoming environment where people may meet others who share their
+              interests and overcome the same obstacles. Our communities and groups offer a secure setting for people to
+              interact,
+              understand, and support one another. Participating in such communities allows one to learn insightful
+              things, get
+              advice, and develop deep relationships. Together, we promote an atmosphere that fosters understanding,
+              compassion, and
+              personal development, assisting people in finding their way towards a happier, healthier existence.</p>
+            <ul class="px-4 mx-4 text-lg list-disc text-justify">
+              <li class="my-4">
+                <a href="https://www.aagsoindia.org/" target="_blank"
+                  class="underline text-[#0000EE] font-bold">Alcoholics Anonymous India: </a>
+                Alcoholics Anonymous (AA) India is a fellowship of men and women who come together to support each other in their
+                journey towards sobriety and recovery from alcohol addiction. Through regular meetings, the members of AA India offer a
+                non-judgmental and confidential space where individuals can share their experiences, find encouragement, and receive
+                guidance to maintain a sober lifestyle.
+              </li>
+              <li class="my-4">
+                <a href="https://support.therapytribe.com/" target="_blank"
+                  class="underline text-[#0000EE] font-bold">The Tribe - Wellness Community: </a>
+                The Tribe is a thriving wellness network that unites people enthusiastic about holistic health. The Tribe cultivates a
+                friendly environment where members may connect, learn, and grow, fostering physical, mental, and spiritual wellness
+                through various activities, workshops, and online interactions.
+              </li>
+              <li class="my-4 mb-10">
+                <a href="https://www.facebook.com/groups/1535872206658543/" target="_blank"
+                  class="underline text-[#0000EE] font-bold">Mental Health Awareness and Support: </a>
+                A facebook group which serves as a safe place to give and receive peer-to-peer advice and support for all mental illnesses.
+              </li>
+            </ul>
+    </div>
+
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

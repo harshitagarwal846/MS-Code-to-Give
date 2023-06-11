@@ -59,20 +59,20 @@ async function api_call(user_res, responseNo) {
 }
 async function saveSurvey(prediction, userResponse) {
   for (let i = 0; i < prediction.length; i++) {
-    prediction[i] = (prediction[i] - 0) || 3;
+    prediction[i] = prediction[i] - 0;
   }
   const survey = new Addiction({
-    marijuana: {
-      level: prediction[0],
-      response: userResponse['marijuana']
-    },
     screen: {
-      level: prediction[1],
+      level: prediction[0],
       response: userResponse['screen']
     },
     behaviour: {
-      level: prediction[2],
+      level: prediction[1],
       response: userResponse['behaviour']
+    },
+    marijuana: {
+      level: prediction[2],
+      response: userResponse['marijuana']
     },
     alcohol: {
       level: prediction[3],
@@ -84,5 +84,6 @@ async function saveSurvey(prediction, userResponse) {
   console.log(s, s._id);
   return s._id;
 }
+
 
 module.exports = { converttoOptionString, converttoOptionNo, find, api_call, saveSurvey }
