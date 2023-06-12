@@ -38,19 +38,19 @@
         <div class="mt-4">
             <p id="quote-box" class="text-lg text-blue-800 font-medium">Build Your New Idea with Laravel Freamwork.</p>
         </div>
-        <div class="flex justify-end items-center">
+        <!-- <div class="flex justify-end items-center">
             <div class="flex items-center">
                 <img src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                     class="w-8 h-8 object-cover rounded-full" alt="avatar">
                 <a class="text-gray-700 text-sm mx-3" href="#">Gita</a>
             </div>
-        </div>
+        </div> -->
         <div class="flex justify-end items-center mt-4">
             <div class="flex items-center">
                 <button id="closeButton" type="button"
                     class="bg-gray-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3">
                     <div class="flex flex-row align-middle">
-                        <a href="/level2/screen" class="mr-2">Next Secttion</a>
+                        <a href="/level2/screen" class="mr-2">Next Section</a>
                         <svg class="w-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -187,7 +187,7 @@
             const formData = new FormData();
             formData.append('answer1', input);
             // Make the API request
-            await fetch('http://127.0.0.1:3004/predict', {
+            await fetch('http://127.0.0.1:5000/predict', {
                 method: 'POST',
                 body: formData
             })
