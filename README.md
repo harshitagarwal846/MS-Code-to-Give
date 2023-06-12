@@ -1,4 +1,4 @@
-# MS-Code-to-Give'23
+# MS-Bread Banglore DREAM project 
 
 ## 👩‍💻 Team members
 
@@ -13,7 +13,7 @@
 
 ## Project
 
-Developed DREAM-WEB, a website that tackles all MVPs and add-ons for challenges Breads faces.
+Developed DREAM-WEB, a website that tackles all MVPs and add-ons for challenges Banglore Breads faces.
 
 It engages the user with a non-judgemental questionnaire and presents them with their addiction state and recommendations for counseling and rehab services, accordingly being anonymous.
 
