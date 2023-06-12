@@ -1,4 +1,4 @@
-# MS-Breads Banglore DREAM project 
+# MS-Breads Bangalore DREAM project 
 
 ## 👩‍💻 Team members
 
