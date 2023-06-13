@@ -27,11 +27,13 @@ const { func } = require('joi');
 
 // init express app
 const app = express();
-app.use(session({
-  secret: 'thisissecret', // Secret key for session encryption
-  resave: false, // Set to false to prevent session from being saved on each request
-  saveUninitialized: false // Set to false to prevent uninitialized sessions from being saved
-}));
+app.use(
+  session({
+    secret: 'thisissecret', // Secret key for session encryption
+    resave: false, // Set to false to prevent session from being saved on each request
+    saveUninitialized: false, // Set to false to prevent uninitialized sessions from being saved
+  })
+);
 
 // middlewares
 
@@ -73,40 +75,44 @@ app.get('/', (req, res) => {
 // routes middlewares
 const isAuthenticated = (req, res, next) => {
   // Check if the user is authenticated (e.g., by checking the session or token)
-  if (req.session.user && req.session.user != "admin") {
+  if (req.session.user && req.session.user != 'admin') {
     // User is authenticated, proceed to the next middleware or route handler
     next();
   } else {
     // User is not authenticated, redirect to login or show an error page
     res.redirect('/home');
   }
-}
+};
 
 const isAdmin = (req, res, next) => {
   // Check if the user is authenticated (e.g., by checking the session or token)
-  if (req.session.user == "admin") {
+  if (req.session.user == 'admin') {
     // User is authenticated, proceed to the next middleware or route handler
     next();
-  }
-  else if (req.session.user) {
-    res.redirect('/home/signedin')
+  } else if (req.session.user) {
+    res.redirect('/home/signedin');
     return;
-  }
-  else {
+  } else {
     // User is not authenticated, redirect to login or show an error page
     res.redirect('/admin');
   }
-}
+};
 function level(i) {
-  if (i == 0) return "No";
-  if (i == 1) return "mild";
-  if (i == 2) return "strong";
-  return "-";
+  if (i == 0) return 'No';
+  if (i == 1) return 'mild';
+  if (i == 2) return 'strong';
+  return '-';
 }
 function recommend(i) {
-  if (i == 1) return "Yes";
-  if (i == 2) return "Yes";
-  return "-";
+  if (i == 1) return 'Yes';
+  if (i == 2) return 'Yes';
+  return '-';
+}
+function colour(i) {
+  if (i == 2) return 'red';
+  if (i == 1) return 'blue';
+  if (i == 0) return 'green';
+  return 'gray';
 }
 const response = {}; //yesno
 const responseNo = {}; //1,2,3,4
@@ -133,15 +139,17 @@ app.get('/result/:id', async (req, res) => {
   const user_res = await Addiction.findOne({ _id });
   const prediction = [];
   const suggestion = [];
+  const color = [];
   for (let i = 0; i < 4; i++) {
     prediction[i] = level(user_res[addictions[i]].level);
     suggestion[i] = recommend(user_res[addictions[i]].level);
+    color[i] = colour(user_res[addictions[i]].level);
   }
   console.log(prediction, suggestion);
-  res.render('./pages/result', { _id, prediction, suggestion });
+  res.render('./pages/result', { _id, prediction, suggestion, color });
 });
 app.get('/result', (req, res) => {
-  const id = "";
+  const id = '';
   res.render('./pages/result', { id });
 });
 
@@ -169,7 +177,7 @@ app.get('/level2/:type', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  if (req.session.user == "admin") {
+  if (req.session.user == 'admin') {
     res.redirect('/dashboard');
     return;
   } else if (req.session.user) {
@@ -180,12 +188,12 @@ app.get('/home', (req, res) => {
 });
 app.get('/resourcesauth', (req, res) => {
   res.render('./pages/resourcesauth.ejs');
-})
+});
 app.get('/resources', (req, res) => {
   res.render('./pages/resources.ejs');
 });
 
-app.get('/dashboard',isAdmin ,async (req, res) => {
+app.get('/dashboard', isAdmin, async (req, res) => {
   //no,mild,severe
   let values = {
     alcohol: [0, 0, 0],
@@ -221,10 +229,10 @@ app.get('/admin/logout', (req, res) => {
       res.redirect('/admin');
     }
   });
-})
+});
 
 app.get('/admin', (req, res) => {
-  if (req.session.user === "admin") {
+  if (req.session.user === 'admin') {
     res.redirect('/dashboard');
     return;
   } else if (req.session.user) {
@@ -233,7 +241,7 @@ app.get('/admin', (req, res) => {
   }
   res.render('./pages/admin_login');
 });
-app.get('/dashboard/cat/:substance',isAdmin ,async (req, res) => {
+app.get('/dashboard/cat/:substance', isAdmin, async (req, res) => {
   let sub = req.params.substance;
   let values = {
     1: [
@@ -284,7 +292,7 @@ app.get('/dashboard/cat/:substance',isAdmin ,async (req, res) => {
   }
 });
 
-app.get('/dashboard/college',isAdmin, async (req, res) => {
+app.get('/dashboard/college', isAdmin, async (req, res) => {
   try {
     const colleges = ['ABC college', 'PQR college', 'XYZ college', 'Other'];
     const sub = ['alcohol', 'behaviour', 'screen', 'marijuana'];
@@ -320,7 +328,7 @@ app.get('/dashboard/college',isAdmin, async (req, res) => {
   }
 });
 
-app.get('/dashboard/gender',isAdmin, async (req, res) => {
+app.get('/dashboard/gender', isAdmin, async (req, res) => {
   try {
     const genders = ['Male', 'Female', 'Other'];
     const sub = ['alcohol', 'behaviour', 'screen', 'marijuana'];
@@ -358,35 +366,33 @@ app.get('/dashboard/gender',isAdmin, async (req, res) => {
 
 app.get('/login', (req, res) => {
   if (req.session.user) {
-    if (req.session.user == "admin")
-      res.redirect('/dashboard')
-    else
-      res.redirect('/home/signedIn');
+    if (req.session.user == 'admin') res.redirect('/dashboard');
+    else res.redirect('/home/signedIn');
     return;
   }
   res.render('./pages/login');
-})
+});
 app.get('/register/:id', (req, res) => {
   if (req.session.user) {
     res.redirect('/home/signedIn');
-    return
+    return;
   }
   const id = req.params.id;
-  res.render('./pages/register', { id })
-})
+  res.render('./pages/register', { id });
+});
 
 app.get('/register', (req, res) => {
   if (req.session.user) {
     res.redirect('/home/signedIn');
-    return
+    return;
   }
-  const id = ""
-  res.render('./pages/register', { id })
-})
+  const id = '';
+  res.render('./pages/register', { id });
+});
 
 app.get('/home/signedIn', isAuthenticated, (req, res) => {
   res.render('./pages/authHome');
-})
+});
 
 app.get('/logout', function (req, res) {
   // Destroy the session or clear the token
@@ -401,12 +407,12 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/admin/login', (req, res) => {
-  if (req.session.user === "admin") {
+  if (req.session.user === 'admin') {
     res.redirect('/dashboard');
     return;
   }
   res.render('./pages/admin_login');
-})
+});
 
 // page not found error handling  middleware
 app.use('*', (req, res, next) => {
