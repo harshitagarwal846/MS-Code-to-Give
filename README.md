@@ -4,7 +4,9 @@
 
 - **Harshit Agarwal**
 - **Mohneesh Kumar Swami**  
-- **Digvijay Anand**  
+- **Digvijay Anand**
+- **Priyanka Kumari**
+-  
 
 ## 👨‍🏫 Mentors
 
